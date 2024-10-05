@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index-E-Commerce</title>
+    <link rel="stylesheet" href="/Index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header class="nav_bar">
+        <div><h2>Ecommerce</h2></div>
+        <div class="nav_link">
+            <ul>
+                <li>
+                    <a href="Index.html" class="active">Home</a>
+                </li>
+                <li>
+                    <a href="Product-page.html">Products</a>
+                </li>
+                <li>
+                    <a href="About-Page.html">About</a>
+                </li>
+                <li>
+                    <a href="Contact-Page.html">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <div class="nav_button">
+            <button value="submit"><i class="fa-solid fa-right-to-bracket"> </i> Login</button>
+            <button><i class="fa-solid fa-user-plus"> </i> Register</button>
+            <a href="Cart-Page.html"><button id="cart-btn"><i class="fa-solid fa-cart-plus" aria-hidden="true" id="cart_icon"></i> Cart (0)</button></a>
+        </div>
+    </header>
+
+    <section class="banner_image">
+        <div class="banner-text">
+        <p class="season">New Season Arrivals</p>
+        <p>This is a wider card with supporting text below as a natural lead-in to additional content. this content is a little bit longer</p>
+        </div>
+    </section>
+
+    <p class="latest_products">Latest Products</p>
+    <div class="product_buttons">
+        <button onclick="filteringItems('all')">All</button>
+        <button onclick="filteringItems('men\'s clothing')">Men's Clothing</button>
+        <button onclick="filteringItems('women\'s clothing')">Women's Clothing</button>
+        <button onclick="filteringItems('jewelery')">Jewellery</button>
+        <button onclick="filteringItems('electronics')">Electronics</button>
+    </div>
+
+    <main>
+            <div class="all_products" id="gokul">
+
+                </div>
+    </main>
+    <div class="designer_name">Designed By  <i class="fa-solid fa-heart fa-lg" style="color: #009dff;"></i> <span class="cool"><a href="My Logo.html">Gokul </a></span></div>
+
+    <script src="Index.js"></script>
+</body>
+</html>

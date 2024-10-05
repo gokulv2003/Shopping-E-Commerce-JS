@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart-Page-Commerce</title>
+    <link rel="stylesheet" href="Cart-Page.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header class="nav_bar">
+        <div><h2>Ecommerce</h2></div>
+        <div class="nav_link">
+            <ul>
+                <li>
+                    <a href="Index.html" >Home</a>
+                </li>
+                <li>
+                    <a href="Product-page.html">Products</a>
+                </li>
+                <li>
+                    <a href="About-Page.html">About</a>
+                </li>
+                <li>
+                    <a href="Contact-Page.html">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <div class="nav_button">
+            <button value="submit"><i class="fa-solid fa-right-to-bracket"> </i> Login</button>
+            <button><i class="fa-solid fa-user-plus"> </i> Register</button>
+            <a href="/Cart-Page.html"><button class="cart_active"><i class="fa-solid fa-cart-plus"></i> Cart <span id="cart_count">(0)</span></button></a>
+        </div>
+    </header>
+
+    <div class="mycart12">
+        <div class="container1">
+            <h2 class="title">My Cart</h2>
+            <div class="cart-grid" id="cart-container">
+            </div>
+            
+        </div>
+            <div class="cart-summary">
+                <h2>Order Summary</h2>
+                <div class="cart11">
+                    <p>Shipping:$<span id="cart-total-price1">30</span></p>  
+                <p>Total: $<span id="cart-total-price">0.00</span></p>
+                <button onclick="checkout()" id="checkout">Go to checkout</button>
+                </div>
+            </div>
+        </div>
+   
+    <div class="designer_name">Designed By  <i class="fa-solid fa-heart fa-lg" style="color: #009dff;"></i> <span class="cool"> Gokul</span></div>
+
+
+    <script>
+        function loadCart(){
+            const cart = JSON.parse(localStorage.getItem('cart'))||[];
+            displaycartItems(cart);
+            updateCartSummary(cart);
+        }
+        // Display cart Items
+
+        function displaycartItems(cart){
+            const cartContainer = document.getElementById('cart-container');
+            cartContainer.innerHTML = '';
+
+            if(cart.length === 0){
+                cartContainer.innerHTML = '<h3 class="your_cart_empty"> Your Cart is Empty </h3>';
+                return;
+            }
+
+            cart.forEach(product => {
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+
+                cartItem.innerHTML =  cartItem.innerHTML = `
+            <img src="${product.image}" alt="${product.title}">
+            <div class="cart-item-details">
+                <h4 class="cart-item-title">${product.title}</h4>
+                <p class="cart-item-price">$${product.price}</p>
+                <div class="cart-item-quantity">
+                    <button onclick="updateQuantity(${product.id}, -1)">-</button>
+                    <span>${product.quantity}</span>
+                    <button onclick="updateQuantity(${product.id}, 1)">+</button>
+                </div>
+            </div>
+
+        `
+        cartContainer.appendChild(cartItem);
+    });
+}
+
+// Update quantity in cart
+function updateQuantity(productId, delta) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const productIndex = cart.findIndex(product => product.id === productId);
+
+        if (productIndex > -1) {
+        cart[productIndex].quantity += delta;
+
+        if (cart[productIndex].quantity === 0) {
+            cart.splice(productIndex, 1); // Remove product quantity is 0
+        }
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+        loadCart();
+    }
+}
+
+// Remove product from cart
+function removeFromCart(productId) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart = cart.filter(product => product.id !== productId);
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    loadCart();
+}
+
+// Update cart summary (total price)
+function updateCartSummary(cart) {
+    const totalPrice = cart.reduce((total, product) => 30+total + (product.price * product.quantity), 0);
+    document.getElementById('cart-total-price').innerText = totalPrice.toFixed(2);
+}
+
+// Checkout (placeholder)
+function checkout() {
+    alert(`Proceeding....Thank You for choosing Cool's Shooping Mall`);
+// You can implement checkout functionality here
+}
+
+ // Update cart count in header
+ function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartCount = cart.reduce((total, product) => total + product.quantity, 0);
+    document.querySelector('#cart-btn').innerHTML = `<i class="fa-solid fa-cart-shopping"></i> Cart (${cartCount})`;
+}
+// Load the cart when the page loads
+window.onload = loadCart;
+
+    </script>
+</body>
+</html>

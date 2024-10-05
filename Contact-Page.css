@@ -1,0 +1,154 @@
+.nav_bar{
+    display: flex;
+    justify-content: space-between;
+    background-color: #f1f1f1d5;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.nav_bar li .active{
+    color:black;
+    font-size: 20px;
+}
+.nav_bar div h2{
+    font-weight: 700;
+    color: #000;
+    font-family: sans-serif;
+    margin-left: 60px;
+}
+.nav_link ul{
+  display: flex;
+  column-gap: 25px;
+  list-style: none;
+  flex-wrap: wrap;
+}
+.nav_link ul a{
+    color: #4d4c4c;
+    text-decoration: none;
+    font-size: 18px;
+    font-family: sans-serif;
+}
+.nav_link ul a:hover{
+    color: #000;
+}
+.nav_button{
+    margin-right: 30px;
+}
+.nav_button button{
+    color: #000;
+    padding:8px;
+    width: 100px;
+    border-radius: 5px;
+    border: 0.5px solid #888585;
+    background-color: transparent;
+    margin-right: 17px;
+    cursor: pointer;
+    font-family: sans-serif;
+    transition: all 0.5s ease-out
+}
+
+.nav_button button:hover,
+button:focus{
+    background-color: #000;
+    color: white;
+}
+
+.nav_button button i{
+    font-size: 16px;
+    margin-right: 5px;
+}
+
+
+/* contact title */
+
+.contact_title{
+    text-align: center;
+    font-size: 40px;
+    font-family: monospace;
+    margin-top: 45px;
+    margin-bottom: 30px;
+}
+
+.hr_line{
+    width: 95%;
+}
+
+/* form section */
+
+.mainform{
+    position: relative;
+    left: 34%;
+    padding: 10px 30px;
+    border: none;
+    background-color: #f0eeee;
+    border-radius: 10px;
+    width: 370px;
+    margin-top: 50px;
+    line-height: 30px;
+    height: 90vh;
+}
+.mainform label{
+    font-size: 24px;
+    line-height: 30px;
+    font-family: serif;
+}
+.mainform input{
+    width: 95%;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 18px;
+    font-family: roboto;
+    font-size: 18px;
+    border: 1px solid #888585;
+}
+.mainform input:focus{
+    outline: 0;
+}
+.mainform textarea{
+    height: 28vh;
+    border: 1px solid #888585;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 20px;
+}
+.mainform textarea:focus{
+    outline: 0;
+}
+.mainform .send_button{
+    padding: 10px;
+    margin-top: 20px;
+    text-align: center;
+    position: relative;
+    left: 35%;
+    width: 30%;
+    font-size: 18px;
+    background-color: #5f5d5d;
+    color: white;
+    border-radius:7px;
+    cursor: pointer;
+    border: none;
+}
+.mainform .send_button:hover{
+    background-color: #000;
+    color: white;
+}
+
+
+
+
+
+
+
+/* designer name section */
+
+.designer_name{
+    align-items: center;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+    margin-top: 13vh;;
+    margin-bottom: 18vh;
+}
+.cool a{
+    text-decoration: underline  #009dff;
+    color: #ff0000;
+    }

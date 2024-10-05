@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product-Page</title>
+    <link rel="stylesheet" href="Product-Page.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header class="nav_bar">
+        <div><h2>Ecommerce</h2></div>
+        <div class="nav_link">
+            <ul>
+                <li>
+                    <a href="Index.html" >Home</a>
+                </li>
+                <li>
+                    <a href="Product-page.html" class="active">Products</a>
+                </li>
+                <li>
+                    <a href="About-Page.html">About</a>
+                </li>
+                <li>
+                    <a href="Contact-Page.html">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <div class="nav_button">
+            <button value="submit"><i class="fa-solid fa-right-to-bracket"> </i> Login</button>
+            <button><i class="fa-solid fa-user-plus"> </i> Register</button>
+            <a href="Cart-Page.html"><button><i class="fa-solid fa-cart-plus" id="cart_icon"></i> Cart <span id="cart_count">(0)</span></button></a>
+        </div>
+    </header>
+    <p class="latest_products">Latest Products</p>
+    <div class="product_buttons">
+        <button onclick="filteringItems('all')">All</button>
+        <button onclick="filteringItems('men\'s clothing')">Men's Clothing</button>
+        <button onclick="filteringItems('women\'s clothing')">Women's Clothing</button>
+        <button onclick="filteringItems('jewelery')">Jewellery</button>
+        <button onclick="filteringItems('electronics')">Electronics</button>
+    </div>
+
+    <main>
+            <div class="all_products" id="gokul">
+
+            </div>
+    </main>
+    <div class="designer_name">Designed By  <i class="fa-solid fa-heart fa-lg" style="color: #009dff;"></i> <span class="cool"><a href="My Logo.html">Gokul</a></span></div>
+
+
+    <script>
+        
+let allProducts  =[];
+
+
+fetch("https://fakestoreapi.com/products")
+
+.then(fetchingResponse => fetchingResponse.json()) 
+.then((dataFetching) => {
+
+    allProducts = dataFetching;
+    displayItems(dataFetching); 
+    })
+    .catch((err)=>console.error("error in while fetching the API",err));
+
+// Function to display products
+function displayItems(productss){
+    const container = document.getElementById('gokul')
+    container.innerHTML = '';
+
+    productss.forEach((items) => {
+
+        const card = document.createElement('div');
+        card.className = 'product';
+
+        let productTitle = items.title;
+        let productDescription = items.description;
+
+
+        card.innerHTML = `
+                        <img src="${items.image}" alt="productsimages" class="product_img">
+                        <h2 class="product_title">${productTitle.length >0 ? productTitle.substring(0, 11).concat("...") : productTitle}</h2>
+                        <p class="product_description">${productDescription.length > 0 ? productDescription.substring(0, 90).concat("...") : productDescription}</p>
+                        <div class="product_price"> $ ${items.price}</div>
+                        <div class="button_div">
+                        <button class="product_details">Details</button>
+                        <button  class="add_to_cart" onClick="addToCart(${items.id})">add to cart</button>
+                        </div>
+                        `
+        container.appendChild(card)
+
+    });
+}       
+// Filter products
+function filteringItems(cat){
+    if(cat === 'all'){
+        displayItems(allProducts)
+    }else{
+        let filteringItems = allProducts.filter((product)=> product.category === cat)
+        displayItems(filteringItems)
+    }
+}
+
+function addToCart(productId) {
+    const product = allProducts.find(p =>p.id === productId);
+    let cart = JSON.parse(localStorage.getItem('cart')) || []
+    
+    const existingProduct = cart.find(item => item.id === productId);
+    if (existingProduct){
+
+      } else {
+        cart.push({ ...product, quantity: 1});
+
+    }
+    localStorage.setItem('cart',JSON.stringify(cart));
+
+    updateCartCount();
+}
+
+// Update cart count in header
+
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const CartCount = cart.reduce((total, product) => total + product.quantity, 0);
+    document.querySelector('#cart-btn').innerHTML = `<i calss = "fa-solid fa-c art-shopping"></i> Cart (${cartCount})`;
+  } 
+
+  window.onload = updateCartCount;
+
+    </script>
+
+
+
+</body>
+</html>
